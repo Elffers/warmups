@@ -1,0 +1,16 @@
+header
+header
+
+header
+
+Kai Jones, 1982/10/23, 350.00
+John Doe, 1980/11/05, 150.00
+Jane Gray, 1983/11/20, 250.00
+Jake Splat, 1970/12/04, 300.00
+Harold Bing, 1972/03/07, 400.00
+Lily Soda, 1976/02/12, 500.00
+
+footer
+footer
+
+footer
