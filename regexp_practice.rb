@@ -31,8 +31,8 @@ group_by_decade.each do |key, value|
     next
   else
    puts "In the decade 19#{key}0, the average income is #{(value.inject(0){|sum, x| sum + x.last})/value.length}"
+  end
 end
-
 
 #Knipbak
 # returns array of birthyears as strings
