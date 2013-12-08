@@ -41,3 +41,12 @@ arrays.map do |x|
   date.scan(/\d+/).first
 end
 
+
+# 1. read in and split into lines
+# 2. extract date and salary from each line
+# 3. group by decade
+# 4. calculate average
+# 5. print
+# and somewhere in the there you need to reject header/footer lines
+# i would suggest in step 2
+

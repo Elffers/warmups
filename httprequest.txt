@@ -1,0 +1,25 @@
+http://127.0.0.1/home
+POST /home HTTP/1.1
+
+Host: 127.0.0.1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+DNT: 1
+Referer: http://127.0.0.1/
+Cookie: passx=87e8af376bc9d9bfec2c7c0193e6af70; PHPSESSID=l9hk7mfh0ppqecg8gialak6gt5
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 30
+username=zurfyx&pass=password
+HTTP/1.1 302 Found
+Date: Sun, 27 Jan 2013 19:26:17 GMT
+Server: Apache/2.4.3 (Win32) OpenSSL/1.0.1c PHP/5.4.7
+X-Powered-By: PHP/5.4.7
+Set-Cookie: user=zurfyx
+Set-Cookie: pass=8f9a9ae93912edbabfd64e9574dbf0a7d5c31ba32819b8dbba7e5238cd0aefe50cba77d5520b074ba109d0d8f409c05ba79d6f5cd193666d5b635b28f9547093
+Content-Length: 232
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: text/html
