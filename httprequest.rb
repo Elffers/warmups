@@ -17,13 +17,13 @@
     attr_accessor :request, :path, :referer, :format, :time, :params
 
     def initialize(filename) #could pass in contents of the file as argument, which would obviate next line
-      @contents = File.read(filename)
-      @request = @contents.match(/GET|POST|PATCH|DELETE/)[0]
-      @path = @contents.scan(/^http.+/).first.scan(/\/[a-z]+/).first
-      @referer = @contents.scan(/^Referer.+/).first.scan(/http.+/).first
-      @format = @contents.scan(/^Content-Type.+/).map {|type| type.partition(/: /).last}
-      @time = @contents.scan(/^Date.+/).first.partition(/: /).last
-      @params = params_hash
+      @contents   = File.read(filename)
+      @request    = @contents.match(/GET|POST|PATCH|DELETE/)[0]
+      @path       = @contents.scan(/^http.+/).first.scan(/\/[a-z]+/).first
+      @referer    = @contents.scan(/^Referer.+/).first.scan(/http.+/).first
+      @format     = @contents.scan(/^Content-Type.+/).map {|type| type.partition(/: /).last}
+      @time       = @contents.scan(/^Date.+/).first.partition(/: /).last
+      @params     = params_hash
     end
 
     # def self.all
