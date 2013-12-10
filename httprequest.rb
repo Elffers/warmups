@@ -13,7 +13,7 @@
   # This will give you more ruby, regex, and knowledge of an HTTP request (help understanding Rails)
 
 
-  class Foo
+  class HTTPRequest
     attr_accessor :request, :path, :referer, :format, :time, :params
 
     def initialize(filename) #could pass in contents of the file as argument, which would obviate next line
@@ -35,6 +35,7 @@
     def params_hash
       hash = {}
       @contents.scan(/^.+/).each do |data|
+        data_partition = data.partition(/: /)
         if data.partition(/: /).last == ""
           next
         else 
@@ -51,4 +52,4 @@
 
   end #end class
 
-  x = Foo.new("httprequest.txt")
+  x = HTTPRequest.new("httprequest.txt")
