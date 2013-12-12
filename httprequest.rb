@@ -13,7 +13,7 @@
   # This will give you more ruby, regex, and knowledge of an HTTP request (help understanding Rails)
 
 
-  class Foo
+  class HttpRequest
     attr_accessor :request, :path, :referer, :format, :time, :params
 
     def initialize(filename) #could pass in contents of the file as argument, which would obviate next line
@@ -51,4 +51,4 @@
 
   end #end class
 
-  x = Foo.new("httprequest.txt")
+  x = HttpRequest.new("httprequest.txt")
