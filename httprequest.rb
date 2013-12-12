@@ -12,18 +12,17 @@
   # This would be a script or something you'd run in the console. 
   # This will give you more ruby, regex, and knowledge of an HTTP request (help understanding Rails)
 
-
-  class HttpRequest
+  class HTTPRequest
     attr_accessor :request, :path, :referer, :format, :time, :params
 
     def initialize(filename) #could pass in contents of the file as argument, which would obviate next line
-      @contents = File.read(filename)
-      @request = @contents.match(/GET|POST|PATCH|DELETE/)[0]
-      @path = @contents.scan(/^http.+/).first.scan(/\/[a-z]+/).first
-      @referer = @contents.scan(/^Referer.+/).first.scan(/http.+/).first
-      @format = @contents.scan(/^Content-Type.+/).map {|type| type.partition(/: /).last}
-      @time = @contents.scan(/^Date.+/).first.partition(/: /).last
-      @params = params_hash
+      @contents   = File.read(filename)
+      @request    = @contents.match(/GET|POST|PATCH|DELETE/)[0]
+      @path       = @contents.scan(/^http.+/).first.scan(/\/[a-z]+/).first
+      @referer    = @contents.scan(/^Referer.+/).first.scan(/http.+/).first
+      @format     = @contents.scan(/^Content-Type.+/).map {|type| type.partition(/: /).last}
+      @time       = @contents.scan(/^Date.+/).first.partition(/: /).last
+      @params     = params_hash
     end
 
     # def self.all
@@ -35,6 +34,7 @@
     def params_hash
       hash = {}
       @contents.scan(/^.+/).each do |data|
+        data_partition = data.partition(/: /)
         if data.partition(/: /).last == ""
           next
         else 
@@ -51,4 +51,5 @@
 
   end #end class
 
-  x = HttpRequest.new("httprequest.txt")
+  x = HTTPRequest.new("httprequest.txt")
+
