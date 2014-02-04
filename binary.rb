@@ -1,7 +1,7 @@
 class Integer
 
   def to_binary
-    exp = exponent_upper_bound(self)
+    exp = Math.log2(self).to_i 
     num = self
     binary = []
     while exp >= 0
@@ -12,7 +12,7 @@ class Integer
     binary.join("").to_i
   end
 
-  #return upper bound exponent of 2
+  #return upper bound exponent of 2. Replaced with Math.log2(n)
   def exponent_upper_bound(n)
     upper_bound = 1
     while  (2**upper_bound) <= n
