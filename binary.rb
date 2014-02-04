@@ -20,5 +20,16 @@ class Integer
     end
     upper_bound - 1
   end
+end
 
+# as isolated method
+def to_binary(num)
+  exp = Math.log2(num).to_i 
+  binary = []
+  while exp >= 0
+    binary << num / (2**exp)
+    num = num % (2**exp)
+    exp = exp - 1
+  end
+  binary.join("").to_i
 end
