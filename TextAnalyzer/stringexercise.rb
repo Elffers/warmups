@@ -18,7 +18,7 @@ word_count = {}
 
 words.each do |word|
   # word_count[word] = word_count[word] || 0
-  word_cound[word].default = 0
+  word_count[word].default = 0
   word_count[word] += 1
   # if word_count.has_key?(word)
   #   word_count[word] += 1
