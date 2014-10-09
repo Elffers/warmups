@@ -10,16 +10,26 @@ def params querystring
   pairs = querystring.split("&")
   pairs.each do |pairs|
     raw_key, value = pairs.split("=", 2) # this ensures splits only at first "="
-    /(?<key>\w+)(?:\[(?<nested_key>\w+)\])?/ =~ raw_key
+    value.gsub!("%20", " ")
+
     #possibilites:
     # "key" => value is just a string
     # "key[]" => value is an array
     # "key[nkey]" => value is a hash, and nkey's value is a string
     # "key[nkey][]" => value is a hash, and nkey's value is an array
-
-    key = key.to_sym
-    value.gsub!("%20", " ")
-    if nested_key
+    # "key[nkey][][mkey]" => value is a hash, and nkey's value is an array of
+    # hashes
+    if /^\w+$/ =~ raw_key
+      params[raw_key.to_sym] = value
+    elsif /^(?<key>\w+)\[\]/ =~ raw_key
+      key = key.to_sym
+      if params.has_key? key
+        params[key].push value
+      else
+        params[key] = [value]
+      end
+    elsif /(?<key>\w+)(\[(?<nested_key>\w+)\]$)/ =~ raw_key
+      key = key.to_sym
       nested_key = nested_key.to_sym
       if params.has_key? key
         params[key][nested_key] = value
@@ -27,8 +37,16 @@ def params querystring
         params[key] = {}
         params[key][nested_key] = value
       end
-    else
-      params[key] = value
+    elsif /(?<key>\w+)(\[(?<nested_key>\w+)\]\[\]$)/ =~ raw_key
+      key = key.to_sym
+      nested_key = nested_key.to_sym
+      if params.has_key? key
+        params[key][nested_key].push value
+      else
+        params[key] = {}
+        params[key][nested_key] = [value]
+      end
+
     end
   end
   p params
