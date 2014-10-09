@@ -3,7 +3,7 @@ require_relative 'params_hash'
 context 'params' do
   let(:querystring) { "market[name]=Cap%20Hill%20Market&market[description]=A%20good%20place%20to%20buy%20produce" }
   let(:querystring1) { "foo=bar&bar=baz" }
-  let(:querystring2){"market[name]=Cap%20Hill%20Market&market[description]=A%20good%20place%20to%20buy%20produce&market[vendors_attributes][][name]=Jules%20Produce"}
+  let(:querystring2){"market[name]=Cap%20Hill%20Market&market[description]=A%20good%20place%20to%20buy%20produce&market[vendors_attributes][][name]=Jules%20Produce&market[vendors_attributes][][city]=Seattle"}
   let(:querystring3){"market[]=Cap%20Hill%20Market&market[]=Sunshine%20Produce"}
   let(:querystring4){"market[vendors][]=foo&market[vendors][]=Sunshine%20Produce"}
 
@@ -37,8 +37,10 @@ context 'params' do
     expect(params[:market][:vendors]).to be_an_instance_of Array
   end
 
-  xit 'parses array as value for key in nested hash' do
+  it 'parses array as value for key in nested hash' do
     params = params querystring2
     expect(params[:market][:vendors_attributes]).to be_an_instance_of Array
+    expect(params[:market][:vendors_attributes].first).to be_an_instance_of Hash
+    expect(params[:market][:vendors_attributes].first[:name]).to eq "Jules Produce"
   end
 end

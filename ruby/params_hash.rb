@@ -46,10 +46,26 @@ def params querystring
         params[key] = {}
         params[key][nested_key] = [value]
       end
-
+    elsif /(?<key>\w+)(\[(?<nested_key>\w+)\]\[\]\[(?<nnested_key>\w+)\]$)/ =~ raw_key
+      key = key.to_sym
+      nested_key = nested_key.to_sym
+      nnested_key = nnested_key.to_sym
+      if params.has_key? key
+        if params[key].has_key? nested_key
+          nested_hash = {}
+          nested_hash[nnested_key] = value
+          params[key][nested_key].push nested_hash
+        else
+          params[key][nested_key] = []
+          nested_hash = {}
+          nested_hash[nnested_key] = value
+          params[key][nested_key].push nested_hash
+        end
+      else
+        params[key] = {}
+      end
     end
   end
   p params
   params
-
 end
