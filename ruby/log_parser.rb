@@ -12,8 +12,7 @@ class LogParser
     File.open filename do |f|
       while not f.eof
         line = f.gets
-        if /Started\s(?<request_type>[A-Z]+)\s(?<path>".+")\s(.+at\s)(?<time>.+(?=$))/=~ line
-          timestamp = Time.parse(time).strftime("%m-%e-%y %H:%M")
+        if /Started\s(?<request_type>[A-Z]+)\s(?<path>".+")\s(.+at\s)(?<timestamp>\d{4}-\d{2}-\d{2}\s\d{2}:\d{2})/=~ line
           request_counter[timestamp] += 1
         end
       end
