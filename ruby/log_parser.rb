@@ -13,7 +13,7 @@ class LogParser
       while not f.eof
         line = f.gets
         if /Started\s(?<request_type>[A-Z]+)\s(?<path>".+")\s(.+at\s)(?<time>.+(?=$))/=~ line
-          timestamp = Time.parse(time).tv_sec
+          timestamp = Time.parse(time).strftime("%m-%e-%y %H:%M")
           request_counter[timestamp] += 1
         end
       end
