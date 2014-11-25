@@ -1,3 +1,5 @@
+require 'time'
+
 class LogParser
   attr_reader :filename
 
@@ -6,19 +8,16 @@ class LogParser
   end
 
   def parse
-    count = 0
-    header = /Started\s(?<request_type>[A-Z]+)\s(?<path>".+")\s(.+at\s)(?<time>.+(?=$))/
+    request_counter = Hash.new 0 
     File.open filename do |f|
       while not f.eof
         line = f.gets
-        if header =~ line
-          count += 1
+        if /Started\s(?<request_type>[A-Z]+)\s(?<path>".+")\s(.+at\s)(?<time>.+(?=$))/=~ line
+          timestamp = Time.parse(time).tv_sec
+          request_counter[timestamp] += 1
         end
       end
     end
-    count
+    request_counter
   end
-end
-
-class Request
 end
